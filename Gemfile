@@ -75,3 +75,4 @@ group :production do
 end
 
 gem 'devise'
+gem 'devise-i18n'
