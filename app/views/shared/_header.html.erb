@@ -1,6 +1,7 @@
 <header>
-  <nav>
-    <p>ログイン</p>
-    <p>新規登録</p>
+  <nav class="flex items-center">
+    <%= link_to " ログイン", new_user_session_path, class: "link link-hover" %>
+    <%= link_to "ログアウト", destroy_user_session_path, data: { turbo_method: :delete }, class: "link link-hover" %>
+    <%= link_to "新規登録", new_user_registration_path, class: "link link-hover" %>
   </nav>
 </header>
