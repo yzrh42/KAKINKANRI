@@ -2,21 +2,18 @@
 <table>
   <thead>
     <tr>
-      <th>User</th>
+      <th>Date</th>
       <th>Game</th>
       <th>Amount</th>
-      <th>Date</th>
       <th>Image</th>
       <th>Memo</th>
     </tr>
   </thead>
   <tbody>
     <% @charges.each do |charge| %>
-      <tr>
-        <td><%= charge.user_id %></td>
+        <td><%= charge.date %></td>
         <td><%= charge.game %></td>
         <td><%= charge.amount %></td>
-        <td><%= charge.date %></td>
         <td><%= image_tag(charge.image) if charge.image.present? %></td>
         <td><%= charge.memo %></td>
       </tr>

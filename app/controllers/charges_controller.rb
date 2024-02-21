@@ -1,8 +1,8 @@
 class ChargesController < ApplicationController
-    before_action :require_login, only: %i[new create]
-    
+    before_action :authenticate_user!
+
     def index
-        @charges = Charge.all
+        @charges = current_user.charges
     end
     
     def new
@@ -12,7 +12,7 @@ class ChargesController < ApplicationController
     def create
         @charge = current_user.charges.new(charge_params)
         if @charge.save
-          redirect_to charges_path, success: '登録しました'
+          redirect_to charges_path(@charge), success: '登録しました'
         else
           flash.now[:danger] = '登録できませんでした'
           render :new
