@@ -11,11 +11,17 @@
   </thead>
   <tbody>
     <% @charges.each do |charge| %>
-        <td><%= charge.date %></td>
+      <tr>
+        <td><%= charge.date.strftime('%m/%d') %></td>
         <td><%= charge.game %></td>
         <td><%= charge.amount %></td>
-        <td><%= image_tag(charge.image) if charge.image.present? %></td>
-        <td><%= charge.memo %></td>
+        <td><%= link_to '詳細', charge_path(charge), class: 'btn btn-success btn-sm' %></td>
+        <td><%= link_to '編集', edit_charge_path(charge), class: 'btn btn-success btn-sm' %></td>
+        <td><%= link_to '削除',
+                      charge_path(charge),
+                      class: 'btn btn-danger btn-sm',
+                      data: { turbo_method: :delete} %></td>
+
       </tr>
     <% end %>
   </tbody>

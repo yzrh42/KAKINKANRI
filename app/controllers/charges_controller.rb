@@ -2,7 +2,7 @@ class ChargesController < ApplicationController
     before_action :authenticate_user!
 
     def index
-        @charges = current_user.charges
+        @charges = current_user.charges.order(date: :asc)
     end
     
     def new
