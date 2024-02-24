@@ -6,6 +6,7 @@ class User < ApplicationRecord
          :omniauthable, omniauth_providers: %i[line]
 
   has_many :charges
+  has_many :games
   
   def social_profile(provider)
     social_profiles.select { |sp| sp.provider == provider.to_s }.first

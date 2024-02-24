@@ -7,6 +7,7 @@ class ChargesController < ApplicationController
     
     def new
         @charge = Charge.new
+        @games = current_user.games
     end
     
     def create
@@ -46,6 +47,6 @@ class ChargesController < ApplicationController
     private
     
      def charge_params
-        params.require(:charge).permit(:user_id, :game, :amount, :date, :image, :memo)
+        params.require(:charge).permit(:user_id, :game_id, :amount, :date, :image, :memo)
     end
 end

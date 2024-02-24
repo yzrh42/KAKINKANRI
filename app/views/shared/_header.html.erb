@@ -4,6 +4,7 @@
       <%= link_to "ログアウト", destroy_user_session_path, data: { turbo_method: :delete }, class: "link link-hover" %>
       <%= link_to "課金記録一覧", charges_path, class: "link link-hover" %>
       <%= link_to "課金記録作成", new_charge_path, class: "link link-hover" %>
+      <%= link_to "ゲーム名登録", new_game_path, class: "link link-hover" %>
     <% else %>
       <%= link_to " ログイン", new_user_session_path, class: "link link-hover" %>
       <%= link_to "新規登録", new_user_registration_path, class: "link link-hover" %>

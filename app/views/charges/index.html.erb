@@ -13,7 +13,7 @@
     <% @charges.each do |charge| %>
       <tr>
         <td><%= charge.date.strftime('%m/%d') %></td>
-        <td><%= charge.game %></td>
+        <td><%= charge.game.name %></td>
         <td><%= charge.amount %></td>
         <td><%= link_to '詳細', charge_path(charge), class: 'btn btn-success btn-sm' %></td>
         <td><%= link_to '編集', edit_charge_path(charge), class: 'btn btn-success btn-sm' %></td>

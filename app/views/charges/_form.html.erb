@@ -1,11 +1,11 @@
 <%= form_with model: charge do |f| %>
     <div class="mb-3">
-      <%= f.label :game %>
-      <%= f.text_field :game, class: 'form-control' %>
+      <%= f.label :game_id, 'ゲーム名' %>
+      <%= f.collection_select :game_id, @games, :id, :name, { include_blank: true }, { class: 'form-control' } %>
     </div>
     <div class="mb-3">
       <%= f.label :amount %>
-      <%= f.number_field :amount, class: 'form-control', rows: 5 %>
+      <%= f.text_field :amount, class: 'form-control', rows: 5 %>
     </div>
     <div class="mb-3">
       <%= f.label :date %>

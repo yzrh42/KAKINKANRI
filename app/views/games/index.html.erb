@@ -1,0 +1,16 @@
+<h1>ゲーム名登録一覧</h1>
+<table>
+  <tbody>
+    <% @games.each do |game| %>
+      <tr>
+        <td><%= game.name %></td>
+        <td><%= link_to '編集', edit_game_path(game), class: 'btn btn-success btn-sm' %></td>
+        <td><%= link_to '削除',
+                      game_path(game),
+                      class: 'btn btn-danger btn-sm',
+                      data: { turbo_method: :delete} %></td>
+
+      </tr>
+    <% end %>
+  </tbody>
+</table>
