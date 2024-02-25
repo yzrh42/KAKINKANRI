@@ -14,7 +14,7 @@
       <%= @charge.date.strftime('%m/%d') %>
       <%= @charge.game.name %>
       <%= @charge.amount %>
-      <%= image_tag(@charge.image) if @charge.image.present? %>
+      <%= image_tag(@charge.image.url) if @charge.image.present? %>
       <%= @charge.memo %>
     </div>
   </div>
