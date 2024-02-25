@@ -12,7 +12,7 @@
     </div>
     <div class="card-body">
       <%= @charge.date.strftime('%m/%d') %>
-      <%= @charge.game %>
+      <%= @charge.game.name %>
       <%= @charge.amount %>
       <%= image_tag(@charge.image) if @charge.image.present? %>
       <%= @charge.memo %>
