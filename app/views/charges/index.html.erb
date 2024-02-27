@@ -24,5 +24,10 @@
 
       </tr>
     <% end %>
+    <%= form_tag charges_path, method: :get do %>
+        <%= month_field_tag :month, params[:month], placeholder: 'YYYY-MM' %>
+        <%= submit_tag '月を選択' %>
+    <% end %>
+    <%= pie_chart @date %>
   </tbody>
 </table>
