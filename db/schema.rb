@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_02_023431) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_02_051606) do
   create_table "budgets", force: :cascade do |t|
     t.integer "year", null: false
     t.integer "month", null: false
@@ -28,6 +28,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_02_023431) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "game_id", null: false
+    t.integer "budget_id"
     t.index ["game_id"], name: "index_charges_on_game_id"
   end
 

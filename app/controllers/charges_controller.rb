@@ -17,7 +17,9 @@ class ChargesController < ApplicationController
         if @charge.save
           redirect_to charges_path(@charge), success: '登録しました'
         else
+          @games = current_user.games
           flash.now[:danger] = '登録できませんでした'
+          Rails.logger.info(@charge.errors.full_messages)
           render :new
         end
     end
@@ -36,6 +38,7 @@ class ChargesController < ApplicationController
         if @charge.update(charge_params)
           redirect_to charge_path(@charge), success: '記録を更新しました'
         else
+          @games = current_user.games
           flash.now[:danger] = '記録を更新できませんでした'
           render :edit
         end
@@ -50,6 +53,6 @@ class ChargesController < ApplicationController
     private
     
      def charge_params
-        params.require(:charge).permit(:user_id, :game_id, :amount, :date, :image, :memo)
+        params.require(:charge).permit(:user_id, :game_id, :amount, :date, :image, :memo, :budget_id)
     end
 end
