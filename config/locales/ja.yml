@@ -1,0 +1,13 @@
+ja:
+  activerecord:
+    models:
+      charge: 課金
+      user: ユーザー
+    attributes:
+      charge:
+        game: ゲーム名
+        amount: 金額
+        date: 日付
+        image: 画像
+        memo: メモ
+

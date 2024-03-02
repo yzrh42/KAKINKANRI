@@ -1,0 +1,24 @@
+<%= form_with model: charge do |f| %>
+    <div class="mb-3">
+      <%= f.label :game_id, 'ゲーム名' %>
+      <%= f.collection_select :game_id, @games, :id, :name, { include_blank: true }, { class: 'form-control' } %>
+    </div>
+    <div class="mb-3">
+      <%= f.label :amount %>
+      <%= f.text_field :amount, class: 'form-control', rows: 5 %>
+    </div>
+    <div class="mb-3">
+      <%= f.label :date %>
+      <%= f.date_field :date, class: 'form-control', rows: 5 %>
+    </div>
+    <div class="mb-3">
+      <%= f.label :image %>
+      <%= f.file_field :image, class: 'form-control', rows: 5 %>
+    </div>
+    <div class="mb-3">
+      <%= f.label :memo %>
+      <%= f.text_area :memo, class: 'form-control', rows: 5 %>
+    </div>
+  
+    <%= f.submit class: 'btn btn-primary'  %>
+<% end %>

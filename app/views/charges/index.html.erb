@@ -1,0 +1,33 @@
+<h1>課金記録</h1>
+<table>
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>Game</th>
+      <th>Amount</th>
+      <th>Image</th>
+      <th>Memo</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @charges.each do |charge| %>
+      <tr>
+        <td><%= charge.date.strftime('%m/%d') %></td>
+        <td><%= charge.game.name %></td>
+        <td><%= charge.amount %></td>
+        <td><%= link_to '詳細', charge_path(charge), class: 'btn btn-success btn-sm' %></td>
+        <td><%= link_to '編集', edit_charge_path(charge), class: 'btn btn-success btn-sm' %></td>
+        <td><%= link_to '削除',
+                      charge_path(charge),
+                      class: 'btn btn-danger btn-sm',
+                      data: { turbo_method: :delete} %></td>
+
+      </tr>
+    <% end %>
+    <%= form_tag charges_path, method: :get do %>
+        <%= month_field_tag :month, params[:month], placeholder: 'YYYY-MM' %>
+        <%= submit_tag '月を選択' %>
+    <% end %>
+    <%= pie_chart @date %>
+  </tbody>
+</table>

@@ -1,0 +1,21 @@
+<div class="container">
+  <div class="card mb-3">
+    <div class="card-header d-flex justify-content-between align-items-center">
+      詳細内容
+        <div class="text-end">
+          <%= link_to '編集', edit_charge_path(@charge), class: 'btn btn-success btn-sm' %>
+          <%= link_to '削除',
+                      charge_path(@charge),
+                      class: 'btn btn-danger btn-sm',
+                      data:  { turbo_method: :delete } %>
+        </div>
+    </div>
+    <div class="card-body">
+      <%= @charge.date.strftime('%m/%d') %>
+      <%= @charge.game.name %>
+      <%= @charge.amount %>
+      <%= image_tag(@charge.image.url) if @charge.image.present? %>
+      <%= @charge.memo %>
+    </div>
+  </div>
+</div>

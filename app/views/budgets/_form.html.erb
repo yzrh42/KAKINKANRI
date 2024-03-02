@@ -1,0 +1,12 @@
+<%= form_with model: budget do |f| %>
+    <div class="mb-3">
+        <%= f.select :year, (2000..Date.today.year).to_a.reverse, { prompt: '年を選択' }, class: 'form-control' %>
+    </div> 
+    <div class="mb-3">
+        <%= f.select :month, (1..12).map, { prompt: '月を選択' }, class: 'form-control' %>
+    </div> 
+    <div class="mb-3">
+      <%= f.text_field :amount, class: 'form-control' %>
+    </div> 
+    <%= f.submit class: 'btn btn-primary'  %>
+<% end %>

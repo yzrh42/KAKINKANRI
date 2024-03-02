@@ -1,0 +1,16 @@
+<h1>今月の予算と課金</h1>
+<% if @budget %>
+    <p>今月の予算: <%= @budget.amount %>円</p>
+    <p>今月の合計支出額: <%= @total_spent_this_month %>円</p>
+    <p>残額: <%= @remaining_budget %>円</p>
+    <p>先月の合計支出と比べた差額: <%= @difference_from_last_month %>円</p>
+
+    <h2>今月の支出一覧</h2>
+    <ul>
+        <% @charges_this_month.each do |charge| %>
+            <li><%= charge.date.strftime("%Y/%m/%d") %>: <%= charge.amount %>円 - <%= charge.game.name %></li>
+        <% end %>
+    </ul>
+<% else %>
+    <p>今月の予算が設定されていません。</p>
+<% end %>
