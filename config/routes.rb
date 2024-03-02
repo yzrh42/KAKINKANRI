@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'home/index'
   devise_for :users, controllers: {
     omniauth_callbacks: "omniauth_callbacks"
   }
@@ -6,6 +7,7 @@ Rails.application.routes.draw do
   root 'static_pages#top'
 
   resources :users, only: [:new]
+  resources :homes, only: [:index]
   resources :charges
   resources :games
   resources :budgets
