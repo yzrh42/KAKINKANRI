@@ -1,0 +1,19 @@
+<h1>予算登録一覧</h1>
+<table>
+  <tbody>
+    <% @budgets.each do |budget| %>
+      <tr>
+        <td><%= budget.year %></td>
+        <td><%= budget.month %></td>
+        <td><%= budget.amount %></td>
+        <td><%= link_to '編集', edit_budget_path(budget), class: 'btn btn-success btn-sm' %></td>
+        <td><%= link_to '削除',
+                      budget_path(budget),
+                      class: 'btn btn-danger btn-sm',
+                      data: { turbo_method: :delete} %></td>
+
+      </tr>
+    <% end %>
+    <%= link_to "予算登録", new_budget_path, class: "link link-hover" %>
+  </tbody>
+</table>
