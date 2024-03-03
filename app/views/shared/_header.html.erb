@@ -1,14 +1,55 @@
 <header>
-  <nav class="flex items-center">
-    <% if user_signed_in? %>
-      <%= link_to "ログアウト", destroy_user_session_path, data: { turbo_method: :delete }, class: "link link-hover" %>
-      <%= link_to "課金記録一覧", charges_path, class: "link link-hover" %>
-      <%= link_to "課金記録作成", new_charge_path, class: "link link-hover" %>
-      <%= link_to "ゲーム名登録", new_game_path, class: "link link-hover" %>
-      <%= link_to "予算登録一覧", budgets_path, class: "link link-hover" %>
-    <% else %>
-      <%= link_to " ログイン", new_user_session_path, class: "link link-hover" %>
-      <%= link_to "新規登録", new_user_registration_path, class: "link link-hover" %>
-    <% end %>
-  </nav>
+  <div class="drawer drawer-end">
+    <input id="my-drawer-3" type="checkbox" class="drawer-toggle" /> 
+    <div class="drawer-content flex flex-col">
+
+      <div class="w-full navbar bg-gradient-to-bl from-blue-100 to-green-100">
+        <div class="flex-none lg:hidden">
+          <label for="my-drawer-3" aria-label="open sidebar" class="btn btn-square btn-ghost">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block w-6 h-6 stroke-current"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+          </label>
+        </div> 
+
+        <div class="flex-1 px-2 mx-2">
+          <%= link_to "KAKINkanri", root_path, class: "pt-2 font-bold text-2xl hover:opacity-70" %>
+        </div>
+
+        <div class="flex-none hidden lg:block">
+          <div class="flex items-center justify-center w-100">
+            <ul class="menu menu-horizontal">
+              <% if user_signed_in? %>
+                <%= link_to "ホーム", homes_path, class: "link link-hover" %>
+                <%= link_to "課金記録一覧", charges_path, class: "link link-hover" %>
+                <%= link_to "課金記録作成", new_charge_path, class: "link link-hover" %>
+                <%= link_to "ゲーム名登録", new_game_path, class: "link link-hover" %>
+                <%= link_to "予算登録一覧", budgets_path, class: "link link-hover" %>
+                <%= link_to "ログアウト", destroy_user_session_path, data: { turbo_method: :delete }, class: "link link-hover" %>
+              <% else %>
+                <%= link_to " ログイン", new_user_session_path, class: "link link-hover" %>
+                <%= link_to "新規登録", new_user_registration_path, class: "link link-hover" %>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="drawer-side">
+      <label for="my-drawer-3" aria-label="close sidebar" class="drawer-overlay"></label> 
+      
+      <ul class="border-dotted border-b-4 border-t-4 border-purple-200">
+        <% if user_signed_in? %>
+          <%= link_to "ホーム", homes_path, class: "link link-hover" %>
+          <%= link_to "課金記録一覧", charges_path, class: "link link-hover" %>
+          <%= link_to "課金記録作成", new_charge_path, class: "link link-hover" %>
+          <%= link_to "ゲーム名登録", new_game_path, class: "link link-hover" %>
+          <%= link_to "予算登録一覧", budgets_path, class: "link link-hover" %>
+          <%= link_to "ログアウト", destroy_user_session_path, data: { turbo_method: :delete }, class: "link link-hover" %>
+        <% else %>
+          <%= link_to " ログイン", new_user_session_path, class: "link link-hover" %>
+          <%= link_to "新規登録", new_user_registration_path, class: "link link-hover" %>
+        <% end %>
+      </ul> 
+    </div> 
+  </div>
 </header>
