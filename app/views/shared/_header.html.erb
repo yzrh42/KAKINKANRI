@@ -21,6 +21,7 @@
                 <%= link_to "ホーム", homes_path, class: "link-hover mx-2" %>
                 <%= link_to "課金記録一覧", charges_path, class: "ink-hover mx-2" %>
                 <%= link_to "課金記録作成", new_charge_path, class: "link-hover mx-2" %>
+                <%= link_to "ゲーム名一覧", games_path, class: "link-hover mx-2" %>
                 <%= link_to "ゲーム名登録", new_game_path, class: "link-hover mx-2" %>
                 <%= link_to "予算登録一覧", budgets_path, class: "link-hover mx-2" %>
                 <%= link_to "ログアウト", destroy_user_session_path, data: { turbo_method: :delete }, class: "link-hover mx-2" %>
@@ -41,6 +42,7 @@
           <li><%= link_to "ホーム", homes_path, class: "block px-4 py-2 my-1 hover rounded-full" %></li>
           <li><%= link_to "課金記録一覧", charges_path, class: "block px-4 py-2 my-1 hover rounded-full" %></li>
           <li><%= link_to "課金記録作成", new_charge_path, class: "block px-4 py-2 my-1 hover rounded-full" %></li>
+          <li><%= link_to "ゲーム名一覧", games_path, class: "block px-4 py-2 my-1 hover rounded-full" %></li>
           <li><%= link_to "ゲーム名登録", new_game_path, class: "block px-4 py-2 my-1 hover rounded-full" %></li>
           <li><%= link_to "予算登録一覧", budgets_path, class: "block px-4 py-2 my-1 hover rounded-full" %></li>
           <li><%= link_to "ログアウト", destroy_user_session_path, data: { turbo_method: :delete }, class: "block px-4 py-2 my-1 hover rounded-full" %></li>
