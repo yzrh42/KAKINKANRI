@@ -1,16 +1,20 @@
-<h1>ゲーム名登録一覧</h1>
-<table>
-  <tbody>
-    <% @games.each do |game| %>
-      <tr>
-        <td><%= game.name %></td>
-        <td><%= link_to '編集', edit_game_path(game), class: 'btn btn-success btn-sm' %></td>
-        <td><%= link_to '削除',
-                      game_path(game),
-                      class: 'btn btn-danger btn-sm',
-                      data: { turbo_method: :delete} %></td>
+<div class="mx-auto w-11/12 max-w-lg text-center my-10">
+  <h1 class="mb-4 text-2xl font-bold">登録済みゲーム一覧</h1>
+  <div class="overflow-x-auto">
+    <table class="table">
+      <tbody>
+        <% @games.each do |game| %>
+          <tr>
+            <td><%= game.name %></td>
+            <td><%= link_to '編集', edit_game_path(game), class: 'btn btn-accent btn-sm' %></td>
+            <td><%= link_to '削除',
+                    game_path(game),
+                    class: 'btn btn-secondary btn-sm',
+                    data: { turbo_method: :delete} %></td>
 
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

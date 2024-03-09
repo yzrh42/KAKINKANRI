@@ -15,7 +15,7 @@ class ChargesController < ApplicationController
     def create
         @charge = current_user.charges.new(charge_params)
         if @charge.save
-          redirect_to charges_path(@charge), success: '登録しました'
+          redirect_to charges_path, success: '登録しました'
         else
           @games = current_user.games
           flash.now[:danger] = '登録できませんでした'

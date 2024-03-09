@@ -1,16 +1,63 @@
-<h1>今月の予算と課金</h1>
-<% if @budget %>
-    <p>今月の予算: <%= @budget.amount %>円</p>
-    <p>今月の合計支出額: <%= @total_spent_this_month %>円</p>
-    <p>残額: <%= @remaining_budget %>円</p>
-    <p>先月の合計支出と比べた差額: <%= @difference_from_last_month %>円</p>
-
-    <h2>今月の支出一覧</h2>
-    <ul>
-        <% @charges_this_month.each do |charge| %>
-            <li><%= charge.date.strftime("%Y/%m/%d") %>: <%= charge.amount %>円 - <%= charge.game.name %></li>
-        <% end %>
-    </ul>
-<% else %>
-    <p>今月の予算が設定されていません。</p>
-<% end %>
+<div class="mx-auto w-11/12 max-w-lg text-center my-10">
+    <h1 class="mb-4 text-2xl font-bold">今月の予算と課金記録</h1>
+    <% if @budget %>
+        <div class="stats shadow">
+            <div class="stat">
+                <div class="stat-title">予算</div>
+                <div class="stat-value"><%= @budget.amount %>円</div>
+            </div>
+            <div class="stat">
+                <div class="stat-title">合計課金額</div>
+                <div class="stat-value"><%= @total_spent_this_month %>円</div>
+                <div class="stat-desc">利用可能額：<%= @remaining_budget %>円</div>
+            </div>
+            <div class="stat">
+                <div class="stat-title">先月との差額</div>
+                <div class="stat-value"><%= @difference_from_last_month %>円</div>
+            </div>
+        </div>
+    <% else %>
+        <div class="stats shadow">
+            <div class="stat">
+                <div class="stat-title">予算</div>
+                <div class="stat-value">ーー円</div>
+                <div class="stat-desc">まだ設定されていません</div>
+            </div>
+            <div class="stat">
+                <div class="stat-title">合計課金額</div>
+                <div class="stat-value"><%= @total_spent_this_month %>円</div>
+            </div>
+            <div class="stat">
+                <div class="stat-title">先月との差額</div>
+                <div class="stat-value"><%= @difference_from_last_month %>円</div>
+            </div>
+        </div>
+    <% end %>
+    <div class="overflow-x-auto">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Game</th>
+                    <th>Amount</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% @charges_this_month.each do |charge| %>
+                    <tr>
+                        <td><%= charge.date.strftime('%m/%d') %></td>
+                        <td><%= charge.game.name %></td>
+                        <td><%= charge.amount %>円</td>
+                        <td><%= link_to '詳細', charge_path(charge), class: 'btn btn-neutral btn-sm' %></td>
+                        <td><%= link_to '編集', edit_charge_path(charge), class: 'btn btn-accent btn-sm' %></td>
+                        <td><%= link_to '削除',
+                                charge_path(charge),
+                                class: 'btn btn-secondary btn-sm',
+                                data: { turbo_method: :delete} %></td>
+          
+                    </tr>
+                <% end %>
+            </tbody>
+        </table>
+    </div>
+</div>

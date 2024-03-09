@@ -1,24 +1,37 @@
-<%= form_with model: charge do |f| %>
-    <div class="mb-3">
-      <%= f.label :game_id, 'ゲーム名' %>
-      <%= f.collection_select :game_id, @games, :id, :name, { include_blank: true }, { class: 'form-control' } %>
+<%= form_with model: charge, local: true, class: "space-y-5" do |f| %>
+  <label class="form-control w-full max-w-xs">
+    <div class="label">
+      <span class="label-text">ゲーム名 ※必須</span>
     </div>
-    <div class="mb-3">
-      <%= f.label :amount %>
-      <%= f.text_field :amount, class: 'form-control', rows: 5 %>
+    <%= f.collection_select :game_id, @games, :id, :name, { include_blank: '登録済ゲーム名から選択' }, { class: 'select select-bordered  w-full max-w-xs' } %>
+  </label>
+  <label class="form-control w-full max-w-xs">
+    <div class="label">
+      <span class="label-text">課金額 ※必須</span>
     </div>
-    <div class="mb-3">
-      <%= f.label :date %>
-      <%= f.date_field :date, class: 'form-control', rows: 5 %>
+    <%= f.text_field :amount, placeholder: "¥", class: "input input-bordered w-full max-w-xs" %>
+  </label>
+
+  <label class="form-control w-full max-w-xs">
+    <div class="label">
+      <span class="label-text">課金日 ※必須</span>
     </div>
-    <div class="mb-3">
-      <%= f.label :image %>
-      <%= f.file_field :image, class: 'form-control', rows: 5 %>
+    <%= f.date_field :date, class: "input input-bordered w-full max-w-xs" %>
+  </label>
+
+  <label class="form-control w-full max-w-xs">
+    <div class="label">
+      <span class="label-text">画像</span>
     </div>
-    <div class="mb-3">
-      <%= f.label :memo %>
-      <%= f.text_area :memo, class: 'form-control', rows: 5 %>
+    <%= f.file_field :image, class: 'file-input file-input-bordered file-input-accent w-full max-w-xs' %>
+  </label>
+
+  <label class="form-control w-full max-w-xs">
+    <div class="label">
+      <span class="label-text">メモ</span>
     </div>
+    <%= f.text_area :memo, class: 'textarea textarea-bordered h-24 w-full' %>
+  </label>
   
-    <%= f.submit class: 'btn btn-primary'  %>
+  <%= f.submit "登録", class: 'btn btn-primary' %>
 <% end %>
