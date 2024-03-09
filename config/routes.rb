@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   resources :charges
   resources :games
   resources :budgets
+  resources :gachas
 
   get "up" => "rails/health#show", as: :rails_health_check
 end

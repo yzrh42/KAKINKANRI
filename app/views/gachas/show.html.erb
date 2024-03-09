@@ -1,0 +1,22 @@
+<div class="container">
+  <div class="card mb-3">
+    <div class="card-header d-flex justify-content-between align-items-center">
+      詳細内容
+        <div class="text-end">
+          <%= link_to '編集', edit_gacha_path(@gacha), class: 'btn btn-success btn-sm' %>
+          <%= link_to '削除',
+                      gacha_path(@gacha),
+                      class: 'btn btn-danger btn-sm',
+                      data:  { turbo_method: :delete } %>
+        </div>
+    </div>
+    <div class="card-body">
+      <%= @gacha.date.strftime('%m/%d') %>
+      <%= @gacha.game.name %>
+      <%= @gacha.number %>
+      <%= @gacha.amount %>
+      <%= image_tag(@gacha.image.url) if @gacha.image.present? %>
+      <%= @gacha.memo %>
+    </div>
+  </div>
+</div>

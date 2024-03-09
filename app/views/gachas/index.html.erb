@@ -1,0 +1,26 @@
+<div class="mx-auto w-11/12 max-w-lg text-center my-10">
+    <div class="flex justify-between mb-4">
+        <h1 class="mb-4 text-2xl font-bold">ガチャ記録一覧</h1>
+        <%= link_to "NEW", new_gacha_path, class: "link link-hover" %>
+    </div>
+    <div class="overflow-x-auto">
+        <table class="table">
+            <tbody>
+                <% @gachas.each do |gacha| %>
+                    <tr>
+                        <td><%= gacha.date.strftime('%m/%d') %></td>
+                        <td><%= gacha.game.name %></td>
+                        <td><%= gacha.number %>連</td>
+                        <td><%= gacha.amount %>円</td>
+                        <td><%= link_to '詳細', gacha_path(gacha), class: 'btn btn-neutral btn-sm' %></td>
+                        <td><%= link_to '編集', edit_gacha_path(gacha), class: 'btn btn-accent btn-sm' %></td>
+                        <td><%= link_to '削除',
+                              gacha_path(gacha),
+                              class: 'btn btn-secondary btn-sm',
+                              data: { turbo_method: :delete} %></td>
+                    </tr>
+                <% end %>
+            </tbody>
+        </table>
+    </div>
+</div>
