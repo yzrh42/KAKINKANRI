@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_02_051606) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_09_085434) do
   create_table "budgets", force: :cascade do |t|
     t.integer "year", null: false
     t.integer "month", null: false
@@ -30,6 +30,20 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_02_051606) do
     t.integer "game_id", null: false
     t.integer "budget_id"
     t.index ["game_id"], name: "index_charges_on_game_id"
+  end
+
+  create_table "gachas", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "game_id", null: false
+    t.integer "amount"
+    t.integer "number"
+    t.datetime "date", null: false
+    t.string "image"
+    t.text "memo"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["game_id"], name: "index_gachas_on_game_id"
+    t.index ["user_id"], name: "index_gachas_on_user_id"
   end
 
   create_table "games", force: :cascade do |t|
@@ -56,4 +70,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_02_051606) do
   end
 
   add_foreign_key "charges", "users"
+  add_foreign_key "gachas", "games"
+  add_foreign_key "gachas", "users"
 end
