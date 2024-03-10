@@ -87,3 +87,5 @@ gem 'carrierwave'
 gem "chartkick"
 
 gem 'byebug'
+
+gem 'ransack'

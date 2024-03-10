@@ -8,5 +8,9 @@ class Charge < ApplicationRecord
     validates :date, presence: true
 
     mount_uploader :image, ImageUploader
+
+    def self.ransackable_attributes(auth_object = nil)
+        ["amount", "budget_id", "created_at", "date", "game_id", "image", "memo", "updated_at", "user_id"]
+    end
 end
   
