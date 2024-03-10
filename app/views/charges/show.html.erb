@@ -1,21 +1,32 @@
-<div class="container">
-  <div class="card mb-3">
-    <div class="card-header d-flex justify-content-between align-items-center">
-      詳細内容
-        <div class="text-end">
-          <%= link_to '編集', edit_charge_path(@charge), class: 'btn btn-success btn-sm' %>
-          <%= link_to '削除',
-                      charge_path(@charge),
-                      class: 'btn btn-danger btn-sm',
-                      data:  { turbo_method: :delete } %>
-        </div>
+<div class="mx-auto w-11/12 max-w-lg text-center my-10">
+  <h1 class="mb-4 text-2xl font-bold">詳細内容</h1>
+    <div class="text-end">
+      <%= link_to '編集', edit_charge_path(@charge), class: 'btn btn-accent btn-sm' %>
+      <%= link_to '削除',
+              charge_path(@charge),
+              class: 'btn btn-secondary btn-sm',
+              data:  { turbo_method: :delete } %>
     </div>
-    <div class="card-body">
-      <%= @charge.date.strftime('%m/%d') %>
-      <%= @charge.game.name %>
-      <%= @charge.amount %>
-      <%= image_tag(@charge.image.url) if @charge.image.present? %>
-      <%= @charge.memo %>
-    </div>
+  <div class="overflow-x-auto">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Game</th>
+                    <th>Amount</th>
+                    <th>Memo</th>
+                    <th>Image</th>
+                </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><%= @charge.date.strftime('%m/%d') %></td>
+                <td><%= @charge.game.name %></td>
+                <td><%= @charge.amount %>円</td>
+                <td><%= @charge.memo %></td>
+                <td><%= image_tag(@charge.image.url) if @charge.image.present? %></td>
+              </tr>
+            </tbody>
+        </table>
   </div>
 </div>
