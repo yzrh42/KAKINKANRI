@@ -1,0 +1,26 @@
+<div class="mx-auto w-11/12 max-w-lg text-center my-10">
+    <div class="flex justify-between mb-4">
+        <h1 class="mb-4 text-2xl font-bold">ガチャ石日数</h1>
+        <%= link_to "NEW", new_stone_path, class: "link link-hover" %>
+    </div>
+    <div class="overflow-x-auto">
+        <table class="table">
+            <tbody>
+                <% @stones.each do |stone| %>
+                    <tr>
+                        <td><%= stone.game.name %></td>
+                        <td><%= stone.goal %>石</td>
+                        <td><%= stone.login %>石</td>
+                        <td><%= stone.daily %>石</td>
+                        <td><%= stone.days_to_reach_goal %>日</td>
+                        <td><%= link_to '編集', edit_stone_path(stone), class: 'btn btn-accent btn-sm' %></td>
+                        <td><%= link_to '削除',
+                              stone_path(stone),
+                              class: 'btn btn-secondary btn-sm',
+                              data: { turbo_method: :delete} %></td>
+                    </tr>
+                <% end %>
+            </tbody>
+        </table>
+    </div>
+</div>
