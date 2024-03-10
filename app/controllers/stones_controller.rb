@@ -3,6 +3,7 @@ class StonesController < ApplicationController
 
     def index
         @stones = current_user.stones
+        @games = Game.includes(:charges).all
     end
     
     def new
@@ -12,6 +13,12 @@ class StonesController < ApplicationController
     
     def create
         @stone = current_user.stones.new(stone_params)
+        existing_stone = Stone.find_by(game_id: @stone.game_id)
+        if existing_stone
+            flash.now[:danger] = "#{existing_stone.game.name}はすでに登録されています"
+            render :new
+            return
+        end
         if @stone.save
           redirect_to stones_path, success: '登録しました'
         else
