@@ -2,9 +2,10 @@ class ChargesController < ApplicationController
     before_action :authenticate_user!
 
     def index
-        selected_month = params[:month].present? ? "#{params[:month]}-01".to_date : Time.now
-        @charges = current_user.charges.where("strftime('%Y', date) = ? AND strftime('%m', date) = ?", selected_month.year.to_s, selected_month.strftime("%m")).order(date: :asc)
-        @date = @charges.joins(:game).group("games.name").sum(:amount).sort_by { |_, v| v }.reverse.to_h
+        @q = current_user.charges.ransack(params[:q])
+        @charges = @q.result.distinct.order(date: :asc)
+        @data_for_chart = @charges.joins(:game).group("strftime('%Y-%m', date)", "games.name").sum(:amount)
+        @games = current_user.games
     end
     
     def new
