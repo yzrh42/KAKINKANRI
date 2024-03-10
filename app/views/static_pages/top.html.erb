@@ -15,10 +15,15 @@
     </p>
   </div>
   <div class="my-20">
-    <h1 class="text-lg font-bold my-4 border-dotted border-b-4 border-green-200">登録はこちらから！</h1>
-        <%= button_to omniauth_authorize_path(:user, :line), data: { turbo: false } do %>
-            <%= image_tag("btn_login_base.png") %>
-        <% end %>
+    <% if user_signed_in? %>
+        <h1 class="text-lg font-bold my-4 border-dotted border-b-4 border-green-200">予算登録はこちらから！</h1>
+        <%= link_to '予算登録', new_budget_path, class: "btn btn-primary shadow-xl mt-10" %>
+    <% else %>
+        <h1 class="text-lg font-bold my-4 border-dotted border-b-4 border-green-200">登録はこちらから！</h1>
+            <%= button_to omniauth_authorize_path(:user, :line), data: { turbo: false } do %>
+                <%= image_tag("btn_login_base.png") %>
+            <% end %>
+    <% end %>
   </div> 
 
 </div>
