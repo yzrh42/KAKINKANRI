@@ -85,7 +85,6 @@ gem 'dotenv-rails'
 gem 'carrierwave'
 
 gem "chartkick"
-gem 'chartable'
 
 gem 'byebug'
 
