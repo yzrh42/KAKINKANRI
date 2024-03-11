@@ -58,6 +58,5 @@ class LinebotController < ApplicationController
           }
         end
         client.reply_message(event['replyToken'], message)
-      end
     end
 end
