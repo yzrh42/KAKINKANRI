@@ -82,6 +82,8 @@ gem 'omniauth-rails_csrf_protection'
 
 gem 'dotenv-rails'
 
+gem 'line-bot-api'
+
 gem 'carrierwave'
 
 gem "chartkick"
