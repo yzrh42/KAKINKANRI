@@ -4,7 +4,7 @@ class ChargesController < ApplicationController
     def index
         @q = current_user.charges.ransack(params[:q])
         @charges = @q.result.distinct.order(date: :asc)
-        @data_for_chart = @charges.joins(:game).group("strftime('%Y-%m', date)", "games.name").sum(:amount)
+        @date_for_chart = @charges.joins(:game).group("games.name").sum(:amount)
         @games = current_user.games
     end
     

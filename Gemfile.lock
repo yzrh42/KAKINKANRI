@@ -101,11 +101,7 @@ GEM
       image_processing (~> 1.1)
       marcel (~> 1.0.0)
       ssrf_filter (~> 1.0)
-    chartable (0.0.0.3)
-      activesupport (>= 3.0.0)
-      chronic (~> 0.10)
     chartkick (5.0.6)
-    chronic (0.10.2)
     concurrent-ruby (1.2.3)
     connection_pool (2.4.1)
     crass (1.0.6)
@@ -154,6 +150,7 @@ GEM
     json (2.7.1)
     jwt (2.8.1)
       base64
+    line-bot-api (1.28.0)
     loofah (2.22.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.12.0)
@@ -343,7 +340,6 @@ DEPENDENCIES
   byebug
   capybara
   carrierwave
-  chartable
   chartkick
   cssbundling-rails
   debug
@@ -352,6 +348,7 @@ DEPENDENCIES
   dotenv-rails
   jbuilder
   jsbundling-rails
+  line-bot-api
   omniauth-line
   omniauth-rails_csrf_protection
   pg
