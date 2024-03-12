@@ -4,7 +4,9 @@ class ChargesController < ApplicationController
     def index
         @q = current_user.charges.ransack(params[:q])
         @charges = @q.result.distinct.order(date: :asc)
-        @date_for_chart = @charges.joins(:game).group("games.name").sum(:amount)
+        @date_for_chart = @charges.includes(:game).each_with_object(Hash.new(0)) do |charge, totals|
+            totals[charge.game.name] += charge.amount
+        end
         @games = current_user.games
     end
     
