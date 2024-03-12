@@ -3,7 +3,7 @@ Rails.application.routes.draw do
     omniauth_callbacks: "omniauth_callbacks"
   }
 
-  post '/callback' => 'linebot#callback'
+  post '/callback', to: 'linebot#callback'
 
   root 'static_pages#top'
 
