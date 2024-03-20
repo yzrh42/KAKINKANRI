@@ -5,4 +5,6 @@ class Gacha < ApplicationRecord
     validates :number, presence: true
     validates :date, presence: true
 
+    mount_uploader :image, ImageUploader
+
 end
