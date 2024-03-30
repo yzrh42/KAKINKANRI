@@ -6,6 +6,7 @@ class User < ApplicationRecord
          :omniauthable, omniauth_providers: %i[line]
 
   has_many :charges
+  has_many :budgets
   has_many :games
   has_many :gachas
   has_many :stones
