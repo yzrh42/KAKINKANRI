@@ -1,6 +1,4 @@
 class StonesController < ApplicationController
-    before_action :authenticate_user!
-
     def index
         @stones = current_user.stones
         @games = Game.includes(:charges).all
