@@ -1,5 +1,5 @@
 <%= form_with model: gacha, local: true, class: "space-y-5" do |f| %>
-
+    <%= render 'shared/error_messages', object: f.object %>
     <label class="form-control w-full max-w-xs">
         <div class="label">
             <span class="label-text">ガチャ日 ※必須</span>
@@ -43,4 +43,4 @@
     </label>
     
     <%= f.submit "登録", class: 'btn btn-primary' %>
-  <% end %>
+<% end %>
