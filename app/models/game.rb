@@ -5,4 +5,15 @@ class Game < ApplicationRecord
     has_many :stones
 
     validates :name, presence: true
+
+    before_destroy :check_associated_records
+
+    private
+
+    def check_associated_records
+        if gachas.exists? || charges.exists? || stones.exists?
+            errors.add(:base, '関連するデータが存在するため削除できません')
+            throw(:abort)
+        end
+    end
 end

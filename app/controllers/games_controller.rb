@@ -37,8 +37,11 @@ class GamesController < ApplicationController
     
     def destroy
         @game = Game.find(params[:id])
-        @game.destroy!
-        redirect_to games_path, success: '記録を削除しました'
+        if @game.destroy
+            redirect_to games_path, success: '記録を削除しました'
+          else
+            redirect_to games_path, alert: @game.errors.full_messages.to_sentence
+        end
     end
     
     private
