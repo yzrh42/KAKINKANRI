@@ -51,11 +51,18 @@ class LinebotController < ApplicationController
           charges_this_month = Charge.where("date >= ? AND date <= ?", Time.current.beginning_of_month, Time.current.end_of_month).order(:date)
           total_spent_this_month = charges_this_month.sum(:amount)
           remaining_budget = budget.amount - total_spent_this_month
-    
-          message = {
-            type: 'text',
-            text: "今月の残り課金可能額は#{remaining_budget}円です！"
-          }
+          
+          if remaining_budget < 0
+            message = {
+              type: 'text',
+              text: "今月の予算を既に#{remaining_budget.abs}円オーバーしています。"
+            }
+          else
+            message = {
+              type: 'text',
+              text: "今月の残り課金可能額は#{remaining_budget}円です！"
+            }
+          end
         end
         client.reply_message(event['replyToken'], message)
     end

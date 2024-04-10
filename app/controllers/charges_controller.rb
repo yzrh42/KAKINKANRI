@@ -1,6 +1,4 @@
 class ChargesController < ApplicationController
-    before_action :authenticate_user!
-
     def index
         @q = current_user.charges.ransack(params[:q])
         @charges = @q.result.distinct.order(date: :asc)

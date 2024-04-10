@@ -1,4 +1,6 @@
 class OmniauthCallbacksController < ApplicationController
+    skip_before_action
+
     def line
         basic_action
     end

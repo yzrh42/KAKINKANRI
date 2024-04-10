@@ -1,6 +1,4 @@
 class GachasController < ApplicationController
-    before_action :authenticate_user!
-
     def index
         @gachas = current_user.gachas
     end
