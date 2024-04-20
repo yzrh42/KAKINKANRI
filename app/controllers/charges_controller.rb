@@ -8,7 +8,9 @@ class ChargesController < ApplicationController
         registered_games = current_user.games.pluck(:name)
         predefined_games = Game::GAMES.values.flatten
         all_games = (registered_games + predefined_games).uniq
-        @games = all_games.map { |game_name, game_id| OpenStruct.new(id: game_id, name: game_name) }
+        @games = all_games.each_with_index.map do |game_name, index|
+            OpenStruct.new(id: index + 1, name: game_name)
+        end
     end
     
     def new
@@ -16,7 +18,9 @@ class ChargesController < ApplicationController
         registered_games = current_user.games.pluck(:name)
         predefined_games = Game::GAMES.values.flatten
         all_games = (registered_games + predefined_games).uniq
-        @games = all_games.map { |game_name, game_id| OpenStruct.new(id: game_id, name: game_name) }
+        @games = all_games.each_with_index.map do |game_name, index|
+            OpenStruct.new(id: index + 1, name: game_name)
+        end
     end
     
     def create
@@ -27,7 +31,9 @@ class ChargesController < ApplicationController
             registered_games = current_user.games.pluck(:name)
             predefined_games = Game::GAMES.values.flatten
             all_games = (registered_games + predefined_games).uniq
-            @games = all_games.map { |game_name, game_id| OpenStruct.new(id: game_id, name: game_name) }
+            @games = all_games.each_with_index.map do |game_name, index|
+                OpenStruct.new(id: index + 1, name: game_name)
+            end
             flash.now[:danger] = '登録できませんでした'
             Rails.logger.info(@charge.errors.full_messages)
             render :new
