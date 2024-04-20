@@ -5,23 +5,32 @@ class ChargesController < ApplicationController
         @date_for_chart = @charges.includes(:game).each_with_object(Hash.new(0)) do |charge, totals|
             totals[charge.game.name] += charge.amount
         end
-        @games = current_user.games
+        registered_games = current_user.games.pluck(:name)
+        predefined_games = Game::GAMES.values.flatten
+        all_games = (registered_games + predefined_games).uniq
+        @games = all_games.map { |game_name, game_id| OpenStruct.new(id: game_id, name: game_name) }
     end
     
     def new
         @charge = Charge.new
-        @games = current_user.games
+        registered_games = current_user.games.pluck(:name)
+        predefined_games = Game::GAMES.values.flatten
+        all_games = (registered_games + predefined_games).uniq
+        @games = all_games.map { |game_name, game_id| OpenStruct.new(id: game_id, name: game_name) }
     end
     
     def create
         @charge = current_user.charges.new(charge_params)
         if @charge.save
-          redirect_to charges_path, success: '登録しました'
+            redirect_to charges_path, success: '登録しました'
         else
-          @games = current_user.games
-          flash.now[:danger] = '登録できませんでした'
-          Rails.logger.info(@charge.errors.full_messages)
-          render :new
+            registered_games = current_user.games.pluck(:name)
+            predefined_games = Game::GAMES.values.flatten
+            all_games = (registered_games + predefined_games).uniq
+            @games = all_games.map { |game_name, game_id| OpenStruct.new(id: game_id, name: game_name) }
+            flash.now[:danger] = '登録できませんでした'
+            Rails.logger.info(@charge.errors.full_messages)
+            render :new
         end
     end
 
