@@ -28,7 +28,7 @@ class GamesController < ApplicationController
     def update
         @game = current_user.games.find(params[:id])
         if @game.update(game_params)
-          redirect_to game_path, success: '記録を更新しました'
+          redirect_to games_path, success: '記録を更新しました'
         else
           flash.now[:danger] = '記録を更新できませんでした'
           render :edit
