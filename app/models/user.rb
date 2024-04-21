@@ -7,7 +7,8 @@ class User < ApplicationRecord
 
   has_many :charges
   has_many :budgets
-  has_many :games
+  has_many :user_games
+  has_many :games, through: :user_games
   has_many :gachas
   has_many :stones
   

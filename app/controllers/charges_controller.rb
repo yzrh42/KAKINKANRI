@@ -5,22 +5,12 @@ class ChargesController < ApplicationController
         @date_for_chart = @charges.includes(:game).each_with_object(Hash.new(0)) do |charge, totals|
             totals[charge.game.name] += charge.amount
         end
-        registered_games = current_user.games.pluck(:name)
-        predefined_games = Game::GAMES.values.flatten
-        all_games = (registered_games + predefined_games).uniq
-        @games = all_games.each_with_index.map do |game_name, index|
-            OpenStruct.new(id: index + 1, name: game_name)
-        end
+        @games = Game.order(name: :asc)
     end
     
     def new
         @charge = Charge.new
-        registered_games = current_user.games.pluck(:name)
-        predefined_games = Game::GAMES.values.flatten
-        all_games = (registered_games + predefined_games).uniq
-        @games = all_games.each_with_index.map do |game_name, index|
-            OpenStruct.new(id: index + 1, name: game_name)
-        end
+        @games = Game.order(name: :asc)
     end
     
     def create
@@ -28,12 +18,7 @@ class ChargesController < ApplicationController
         if @charge.save
             redirect_to charges_path, success: '登録しました'
         else
-            registered_games = current_user.games.pluck(:name)
-            predefined_games = Game::GAMES.values.flatten
-            all_games = (registered_games + predefined_games).uniq
-            @games = all_games.each_with_index.map do |game_name, index|
-                OpenStruct.new(id: index + 1, name: game_name)
-            end
+            @games = Game.order(name: :asc)
             flash.now[:danger] = '登録できませんでした'
             Rails.logger.info(@charge.errors.full_messages)
             render :new

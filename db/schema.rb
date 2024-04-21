@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_24_140338) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_21_110723) do
   create_table "budgets", force: :cascade do |t|
     t.integer "year", null: false
     t.integer "month", null: false
@@ -51,7 +51,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_24_140338) do
     t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "user_id", null: false
+    t.integer "user_id"
     t.index ["user_id"], name: "index_games_on_user_id"
   end
 
@@ -67,6 +67,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_24_140338) do
     t.integer "current"
     t.index ["game_id"], name: "index_stones_on_game_id"
     t.index ["user_id"], name: "index_stones_on_user_id"
+  end
+
+  create_table "user_games", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "game_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["game_id"], name: "index_user_games_on_game_id"
+    t.index ["user_id"], name: "index_user_games_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -89,4 +98,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_24_140338) do
   add_foreign_key "gachas", "users"
   add_foreign_key "stones", "games"
   add_foreign_key "stones", "users"
+  add_foreign_key "user_games", "games"
+  add_foreign_key "user_games", "users"
 end
