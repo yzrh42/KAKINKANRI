@@ -1,6 +1,6 @@
 class GamesController < ApplicationController
     def index
-        @games = current_user.games
+        @games = Game.where(user_id: [current_user.id, nil]).order(name: :asc)
     end
     
     def new
@@ -28,7 +28,7 @@ class GamesController < ApplicationController
     def update
         @game = current_user.games.find(params[:id])
         if @game.update(game_params)
-          redirect_to game_path, success: '記録を更新しました'
+          redirect_to games_path, success: '記録を更新しました'
         else
           flash.now[:danger] = '記録を更新できませんでした'
           render :edit
@@ -46,7 +46,7 @@ class GamesController < ApplicationController
     
     private
     
-     def game_params
+    def game_params
         params.require(:game).permit(:user_id, :name)
     end
 end

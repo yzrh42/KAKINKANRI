@@ -4,7 +4,8 @@ class Game < ApplicationRecord
     has_many :charges
     has_many :stones
 
-    validates :name, presence: true
+    validates :name, presence: true, uniqueness: true
+
 
     before_destroy :check_associated_records
 

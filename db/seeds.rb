@@ -1,9 +1,35 @@
-# This file should ensure the existence of records required to run the application in every environment (production,
-# development, test). The code here should be idempotent so that it can be executed at any point in every environment.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Example:
-#
-#   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
-#     MovieGenre.find_or_create_by!(name: genre_name)
-#   end
+games = [
+  { name: 'モンスターストライク' },
+  { name: 'ウマ娘 プリティーダービー' },
+  { name: 'Fate/Grand Order' },
+  { name: 'プロ野球スピリッツA' },
+  { name: 'ドラゴンボールZ ドッカンバトル' },
+  { name: 'パズル&ドラゴンズ' },
+  { name: 'ドラゴンクエストウォーク' },
+  { name: '崩壊：スターレイル' },
+  { name: '原神' },
+  { name: 'eFootball 2024' },
+  { name: 'Pokémon GO' },
+  { name: 'キノコ伝説：勇者と魔法のランプ' },
+  { name: 'ブルーアーカイブ' },
+  { name: 'ONE PIECE バウンティラッシュ' },
+  { name: 'ロイヤルマッチ' },
+  { name: 'LINE:ディズニーツムツム' },
+  { name: '勝利の女神:NIKKE' },
+  { name: 'プロジェクトセカイカラフルステージ!feat.初音ミク' },
+  { name: 'ヘブンバーンズレッド' },
+  { name: 'パズル&サバイバル' },
+  { name: '荒野行動' },
+  { name: '呪術廻戦 ファントムパレード' },
+  { name: 'あんさんぶるスターズ!!Music' },
+  { name: '聖闘士星矢レジェンドオブジャスティス' },
+  { name: 'モンスターハンターNow' },
+  { name: 'アークナイツ' },
+  { name: 'アイドルマスター シンデレラガールズ' },
+  { name: 'アイドリッシュセブン' },
+  { name: 'グランブルーファンタジー' },
+]
+
+games.each do |game|
+  Game.find_or_create_by!(name: game[:name])
+end
