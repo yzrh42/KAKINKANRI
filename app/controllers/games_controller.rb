@@ -1,6 +1,6 @@
 class GamesController < ApplicationController
     def index
-        @games = Game.order(name: :asc)
+        @games = Game.where(user_id: [current_user.id, nil]).order(name: :asc)
     end
     
     def new
@@ -46,7 +46,7 @@ class GamesController < ApplicationController
     
     private
     
-     def game_params
+    def game_params
         params.require(:game).permit(:user_id, :name)
     end
 end

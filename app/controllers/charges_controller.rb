@@ -5,12 +5,12 @@ class ChargesController < ApplicationController
         @date_for_chart = @charges.includes(:game).each_with_object(Hash.new(0)) do |charge, totals|
             totals[charge.game.name] += charge.amount
         end
-        @games = Game.order(name: :asc)
+        @games = Game.where(user_id: [current_user.id, nil]).order(name: :asc)
     end
     
     def new
         @charge = Charge.new
-        @games = Game.order(name: :asc)
+        @games = Game.where(user_id: [current_user.id, nil]).order(name: :asc)
     end
     
     def create
@@ -18,7 +18,7 @@ class ChargesController < ApplicationController
         if @charge.save
             redirect_to charges_path, success: '登録しました'
         else
-            @games = Game.order(name: :asc)
+            @games = Game.where(user_id: [current_user.id, nil]).order(name: :asc)
             flash.now[:danger] = '登録できませんでした'
             Rails.logger.info(@charge.errors.full_messages)
             render :new

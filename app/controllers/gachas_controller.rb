@@ -5,7 +5,7 @@ class GachasController < ApplicationController
     
     def new
         @gacha = Gacha.new
-        @games = current_user.games
+        @games = Game.where(user_id: [current_user.id, nil]).order(name: :asc)
     end
     
     def create
@@ -13,7 +13,7 @@ class GachasController < ApplicationController
         if @gacha.save
           redirect_to gachas_path, success: '登録しました'
         else
-          @games = current_user.games
+          @games = Game.where(user_id: [current_user.id, nil]).order(name: :asc)
           flash.now[:danger] = '登録できませんでした'
           render :new
         end
@@ -25,7 +25,7 @@ class GachasController < ApplicationController
 
     def edit
         @gacha = Gacha.find(params[:id])
-        @games = current_user.games
+        @games = Game.where(user_id: [current_user.id, nil]).order(name: :asc)
     end
 
     def update
@@ -33,7 +33,7 @@ class GachasController < ApplicationController
         if @gacha.update(gacha_params)
           redirect_to gachas_path, success: '記録を更新しました'
         else
-          @games = current_user.games
+          @games = Game.where(user_id: [current_user.id, nil]).order(name: :asc)
           flash.now[:danger] = '記録を更新できませんでした'
           render :edit
         end

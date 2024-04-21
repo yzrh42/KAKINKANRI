@@ -3,8 +3,6 @@ class Game < ApplicationRecord
     has_many :gachas
     has_many :charges
     has_many :stones
-    has_many :user_games
-    has_many :users, through: :user_games
 
     validates :name, presence: true, uniqueness: true
 

@@ -6,7 +6,7 @@ class StonesController < ApplicationController
     
     def new
         @stone = Stone.new
-        @games = current_user.games
+        @games = Game.where(user_id: [current_user.id, nil]).order(name: :asc)
     end
     
     def create
@@ -20,7 +20,7 @@ class StonesController < ApplicationController
         if @stone.save
           redirect_to stones_path, success: '登録しました'
         else
-          @games = current_user.games
+          @games = Game.where(user_id: [current_user.id, nil]).order(name: :asc)
           flash.now[:danger] = '登録できませんでした'
           render :new
         end
@@ -32,7 +32,7 @@ class StonesController < ApplicationController
 
     def edit
         @stone = Stone.find(params[:id])
-        @games = current_user.games
+        @games = Game.where(user_id: [current_user.id, nil]).order(name: :asc)
     end
 
     def update
@@ -40,7 +40,7 @@ class StonesController < ApplicationController
         if @stone.update(stone_params)
           redirect_to stones_path, success: '記録を更新しました'
         else
-          @games = current_user.games
+          @games = Game.where(user_id: [current_user.id, nil]).order(name: :asc)
           flash.now[:danger] = '記録を更新できませんでした'
           render :edit
         end
