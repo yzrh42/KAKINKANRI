@@ -1,6 +1,7 @@
 class BudgetsController < ApplicationController
     def index
-        @budgets = Budget.order(year: :asc, month: :asc)
+        @budgets = current_user.budgets.order(year: :asc, month: :asc)
+        @monthly_balance = current_user.monthly_balance(Time.zone.now.year)
     end
     
     def new
@@ -8,9 +9,9 @@ class BudgetsController < ApplicationController
     end
     
     def create
-        @budget = Budget.new(budget_params)
+        @budget = current_user.budgets.new(budget_params)
         # すでに同じ年月が存在するかどうかをチェック
-        existing_budget = Budget.find_by(year: @budget.year, month: @budget.month)
+        existing_budget = current_user.budgets.find_by(year: @budget.year, month: @budget.month)
         if existing_budget
             flash.now[:danger] = "#{existing_budget.year}年#{existing_budget.month}月はすでに登録されています"
             render :new

@@ -31,4 +31,18 @@ class User < ApplicationRecord
     self.raw_info = raw_info.to_json
     self.save!
   end
+
+  def monthly_balance(year)
+    monthly_balances = {}
+    (1..12).each do |month|
+      monthly_budget = budgets.find_by(year: year, month: month)
+      next if monthly_budget.nil?
+
+      start_date = Date.new(year, month, 1)
+      end_date = start_date.end_of_month
+      monthly_charge = charges.where(date: start_date..end_date).sum(:amount)
+      monthly_balances[month] = monthly_budget.amount - monthly_charge
+    end
+    monthly_balances
+  end
 end
