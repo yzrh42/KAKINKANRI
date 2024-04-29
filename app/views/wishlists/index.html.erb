@@ -1,0 +1,31 @@
+<div class="mx-auto w-11/12 max-w-lg text-center my-10">
+    <div class="flex justify-between mb-4">
+        <h1 class="text-2xl font-bold">欲しいもの一覧</h1>
+        <%= link_to "NEW", new_wishlist_path, class: "btn btn-neutral btn-sm" %>
+    </div>
+    <div class="overflow-x-auto">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Price</th>
+                    <th>Possibility</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% @wishlists.each do |wishlist| %>
+                    <tr>
+                        <td><%= wishlist.name %></td>
+                        <td><%= wishlist.price %>円</td>
+                        <td><%= link_to '編集', edit_wishlist_path(wishlist), class: 'btn btn-accent btn-sm' %></td>
+                        <td><%= link_to '削除',
+                                wishlist_path(wishlist),
+                                class: 'btn btn-secondary btn-sm',
+                                data: { turbo_method: :delete} %></td>
+          
+                    </tr>
+                <% end %>
+            </tbody>
+        </table>
+    </div>
+</div>

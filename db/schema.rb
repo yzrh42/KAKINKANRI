@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_21_110723) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_29_102812) do
   create_table "budgets", force: :cascade do |t|
     t.integer "year", null: false
     t.integer "month", null: false
@@ -84,9 +84,20 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_21_110723) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  create_table "wishlists", force: :cascade do |t|
+    t.string "name"
+    t.integer "price"
+    t.boolean "is_purchasable"
+    t.integer "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_wishlists_on_user_id"
+  end
+
   add_foreign_key "charges", "users"
   add_foreign_key "gachas", "games"
   add_foreign_key "gachas", "users"
   add_foreign_key "stones", "games"
   add_foreign_key "stones", "users"
+  add_foreign_key "wishlists", "users"
 end

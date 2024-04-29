@@ -10,6 +10,7 @@ class User < ApplicationRecord
   has_many :games
   has_many :gachas
   has_many :stones
+  has_many :wishlists
   
   def social_profile(provider)
     social_profiles.select { |sp| sp.provider == provider.to_s }.first
