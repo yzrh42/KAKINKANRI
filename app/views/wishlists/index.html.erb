@@ -7,6 +7,7 @@
         <table class="table">
             <thead>
                 <tr>
+                    <th>優先順位</th> 
                     <th>Name</th>
                     <th>Price</th>
                     <th>Possibility</th>
@@ -15,6 +16,10 @@
             <tbody>
                 <% @wishlists.each do |wishlist| %>
                     <tr>
+                        <td>
+                            <%= link_to '↑', move_higher_wishlist_path(wishlist), style: "margin-right: 10px;" %>
+                            <%= link_to '↓', move_lower_wishlist_path(wishlist) %>
+                        </td>
                         <td><%= wishlist.name %></td>
                         <td><%= wishlist.price %>円</td>
                         <td><%= link_to '編集', edit_wishlist_path(wishlist), class: 'btn btn-accent btn-sm' %></td>

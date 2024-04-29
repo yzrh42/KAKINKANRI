@@ -18,7 +18,13 @@ Rails.application.routes.draw do
   resources :budgets
   resources :gachas
   resources :stones
-  resources :wishlists
+  
+  resources :wishlists do
+    member do
+      get :move_higher
+      get :move_lower
+    end
+  end
 
   get "up" => "rails/health#show", as: :rails_health_check
 end
