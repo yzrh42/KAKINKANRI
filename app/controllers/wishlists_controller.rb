@@ -50,6 +50,12 @@ class WishlistsController < ApplicationController
         Wishlist.find(params[:id]).move_lower
         redirect_to action: :index
     end
+
+    def purchase
+        @wishlist = Wishlist.find(params[:id])
+        @wishlist.update(purchased_at: Time.current)
+        redirect_to wishlists_path, notice: '購入済に変更しました。'
+    end
     
     private
     

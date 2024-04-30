@@ -14,7 +14,7 @@
                 </tr>
             </thead>
             <tbody>
-                <% @wishlists.each do |wishlist| %>
+                <% @wishlists.where(purchased_at: nil).each do |wishlist| %>
                     <tr>
                         <td>
                             <%= link_to '↑', move_higher_wishlist_path(wishlist), style: "margin-right: 10px;" %>
@@ -27,7 +27,7 @@
                                 wishlist_path(wishlist),
                                 class: 'btn btn-secondary btn-sm',
                                 data: { turbo_method: :delete} %></td>
-          
+                        <td><%= link_to '購入済み', purchase_wishlist_path(wishlist), data: { turbo_method: :put }, class: 'btn btn-primary btn-sm' %></td>
                     </tr>
                 <% end %>
             </tbody>
