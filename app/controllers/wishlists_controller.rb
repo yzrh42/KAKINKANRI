@@ -56,6 +56,11 @@ class WishlistsController < ApplicationController
         @wishlist.update(purchased_at: Time.current)
         redirect_to wishlists_path, notice: '購入済に変更しました。'
     end
+
+    def purchased
+        @wishlists = Wishlist.where.not(purchased_at: nil)
+    end
+      
     
     private
     

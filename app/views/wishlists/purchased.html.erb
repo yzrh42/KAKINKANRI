@@ -1,0 +1,31 @@
+<div class="mx-auto w-11/12 max-w-lg text-center my-10">
+    <div class="flex justify-between mb-4">
+        <h1 class="text-2xl font-bold">購入済一覧</h1>
+    </div>
+    <div class="overflow-x-auto">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% @wishlists.where.not(purchased_at: nil).each do |purchased_wishlist| %>
+                    <tr>
+                        <td><%= purchased_wishlist.name %></td>
+                        <td><%= number_with_delimiter(purchased_wishlist.price) %>円</td>
+                        <td><%= link_to '編集', edit_wishlist_path(purchased_wishlist), class: 'btn btn-accent btn-sm' %></td>
+                        <td><%= link_to '削除',
+                            wishlist_path(purchased_wishlist),
+                            class: 'btn btn-secondary btn-sm',
+                            data: { turbo_method: :delete} %></td>
+                    </tr>
+                <% end %>
+            </tbody>
+        </table>
+    </div>
+    <div class="mt-4">
+        <%= link_to '未購入のものはこちらから', wishlists_path, class: 'btn btn-link' %>
+    </div>
+</div>
