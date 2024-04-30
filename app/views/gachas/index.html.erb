@@ -10,8 +10,8 @@
                     <tr>
                         <td><%= gacha.date.strftime('%m/%d') %></td>
                         <td><%= gacha.game.name %></td>
-                        <td><%= gacha.number %>連</td>
-                        <td><%= gacha.amount %>円</td>
+                        <td><%= number_with_delimiter(gacha.number) %>連</td>
+                        <td><%= number_with_delimiter(gacha.amount) %>円</td>
                         <td><%= link_to '詳細', gacha_path(gacha), class: 'btn btn-neutral btn-sm' %></td>
                         <td><%= link_to '編集', edit_gacha_path(gacha), class: 'btn btn-accent btn-sm' %></td>
                         <td><%= link_to '削除',

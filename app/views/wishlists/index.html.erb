@@ -21,7 +21,7 @@
                             <%= link_to '↓', move_lower_wishlist_path(wishlist) %>
                         </td>
                         <td><%= wishlist.name %></td>
-                        <td><%= wishlist.price %>円</td>
+                        <td><%= number_with_delimiter(wishlist.price) %>円</td>
                         <td><%= link_to '編集', edit_wishlist_path(wishlist), class: 'btn btn-accent btn-sm' %></td>
                         <td><%= link_to '削除',
                                 wishlist_path(wishlist),

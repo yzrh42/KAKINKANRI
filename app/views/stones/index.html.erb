@@ -9,10 +9,10 @@
                 <% @stones.each do |stone| %>
                     <tr>
                         <td><%= stone.game.name %></td>
-                        <td><%= stone.goal %>石</td>
-                        <td><%= stone.login %>石</td>
-                        <td><%= stone.daily %>石</td>
-                        <td><%= stone.days_to_reach_goal %>日</td>
+                        <td><%= number_with_delimiter(stone.goal) %>石</td>
+                        <td><%= number_with_delimiter(stone.login) %>石</td>
+                        <td><%= number_with_delimiter(stone.daily) %>石</td>
+                        <td><%= number_with_delimiter(stone.days_to_reach_goal) %>日</td>
                         <td><%= link_to '編集', edit_stone_path(stone), class: 'btn btn-accent btn-sm' %></td>
                         <td><%= link_to '削除',
                               stone_path(stone),
