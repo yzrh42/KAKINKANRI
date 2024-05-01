@@ -1,5 +1,7 @@
 class WishlistsController < ApplicationController
     def index
+        @current_year_balance = current_user.monthly_balance(Date.today.year)
+        @available_balance = @current_year_balance.values.sum
         @wishlists = current_user.wishlists.order(:position)
     end
     

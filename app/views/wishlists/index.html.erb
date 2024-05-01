@@ -14,6 +14,7 @@
                 </tr>
             </thead>
             <tbody>
+                <% available_balance = @current_year_balance.values.sum %>
                 <% @wishlists.where(purchased_at: nil).each do |wishlist| %>
                     <tr>
                         <td>
@@ -22,12 +23,17 @@
                         </td>
                         <td><%= wishlist.name %></td>
                         <td><%= number_with_delimiter(wishlist.price) %>円</td>
+                        <% if available_balance >= wishlist.price %>
+                            <td><%= link_to '購入', purchase_wishlist_path(wishlist), data: { turbo_method: :put }, class: 'btn btn-primary btn-sm' %></td>
+                            <% available_balance -= wishlist.price %>
+                        <% else %>
+                            <td>購入不可</td>
+                        <% end %>
                         <td><%= link_to '編集', edit_wishlist_path(wishlist), class: 'btn btn-accent btn-sm' %></td>
                         <td><%= link_to '削除',
                                 wishlist_path(wishlist),
                                 class: 'btn btn-secondary btn-sm',
                                 data: { turbo_method: :delete} %></td>
-                        <td><%= link_to '購入済み', purchase_wishlist_path(wishlist), data: { turbo_method: :put }, class: 'btn btn-primary btn-sm' %></td>
                     </tr>
                 <% end %>
             </tbody>
