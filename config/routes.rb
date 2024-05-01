@@ -19,5 +19,16 @@ Rails.application.routes.draw do
   resources :gachas
   resources :stones
 
+  resources :wishlists do
+    member do
+      get :move_higher
+      get :move_lower
+      put :purchase
+    end
+    collection do
+      get 'purchased_wishlists', to: 'wishlists#purchased', as: 'purchased_wishlists'
+    end
+  end
+
   get "up" => "rails/health#show", as: :rails_health_check
 end

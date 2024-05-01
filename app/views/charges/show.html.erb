@@ -22,7 +22,7 @@
               <tr>
                 <td><%= @charge.date.strftime('%m/%d') %></td>
                 <td><%= @charge.game.name %></td>
-                <td><%= @charge.amount %>円</td>
+                <td><%= number_with_delimiter(@charge.amount) %>円</td>
                 <td><%= @charge.memo %></td>
                 <td><%= image_tag(@charge.image.url) if @charge.image.present? %></td>
               </tr>

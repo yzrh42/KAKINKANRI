@@ -1,0 +1,45 @@
+<div class="mx-auto w-11/12 max-w-lg text-center my-10">
+    <div class="flex justify-between mb-4">
+        <h1 class="text-2xl font-bold">欲しいもの一覧</h1>
+        <%= link_to "NEW", new_wishlist_path, class: "btn btn-neutral btn-sm" %>
+    </div>
+    <div class="overflow-x-auto">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>優先順位</th> 
+                    <th>Name</th>
+                    <th>Price</th>
+                    <th>Possibility</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% available_balance = @current_year_balance.values.sum %>
+                <% @wishlists.where(purchased_at: nil).each do |wishlist| %>
+                    <tr>
+                        <td>
+                            <%= link_to '↑', move_higher_wishlist_path(wishlist), style: "margin-right: 10px;" %>
+                            <%= link_to '↓', move_lower_wishlist_path(wishlist) %>
+                        </td>
+                        <td><%= wishlist.name %></td>
+                        <td><%= number_with_delimiter(wishlist.price) %>円</td>
+                        <% if available_balance >= wishlist.price %>
+                            <td><%= link_to '購入', purchase_wishlist_path(wishlist), data: { turbo_method: :put }, class: 'btn btn-primary btn-sm' %></td>
+                            <% available_balance -= wishlist.price %>
+                        <% else %>
+                            <td>購入不可</td>
+                        <% end %>
+                        <td><%= link_to '編集', edit_wishlist_path(wishlist), class: 'btn btn-accent btn-sm' %></td>
+                        <td><%= link_to '削除',
+                                wishlist_path(wishlist),
+                                class: 'btn btn-secondary btn-sm',
+                                data: { turbo_method: :delete} %></td>
+                    </tr>
+                <% end %>
+            </tbody>
+        </table>
+    </div>
+    <div class="mt-4">
+        <%= link_to '購入済みのものはこちらから', purchased_wishlists_wishlists_path, class: 'btn btn-link' %>
+    </div>
+</div>

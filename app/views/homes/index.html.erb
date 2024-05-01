@@ -4,18 +4,18 @@
         <div class="stats shadow">
             <div class="stat">
                 <div class="stat-title">予算</div>
-                <div class="stat-value"><%= @budget.amount %>円</div>
+                <div class="stat-value"><%= number_with_delimiter(@budget.amount) %>円</div>
             </div>
             <div class="stat">
                 <div class="stat-title">合計課金額</div>
-                <div class="stat-value"><%= @total_spent_this_month %>円</div>
+                <div class="stat-value"><%= number_with_delimiter(@total_spent_this_month) %>円</div>
                 <div class="stat-desc">
-                    課金可能額：<%= @remaining_budget < 0 ? "△#{@remaining_budget.abs}" : @remaining_budget %>円
+                    課金可能額：<%= @remaining_budget < 0 ? "△#{number_with_delimiter(@remaining_budget.abs)}" : number_with_delimiter(@remaining_budget) %>円
                 </div>
             </div>
             <div class="stat">
                 <div class="stat-title">先月との差額</div>
-                <div class="stat-value"><%= @difference_from_last_month %>円</div>
+                <div class="stat-value"><%= number_with_delimiter(@difference_from_last_month) %>円</div>
             </div>
         </div>
     <% else %>
@@ -27,11 +27,11 @@
             </div>
             <div class="stat">
                 <div class="stat-title">合計課金額</div>
-                <div class="stat-value"><%= @total_spent_this_month %>円</div>
+                <div class="stat-value"><%= number_with_delimiter(@total_spent_this_month) %>円</div>
             </div>
             <div class="stat">
                 <div class="stat-title">先月との差額</div>
-                <div class="stat-value"><%= @difference_from_last_month %>円</div>
+                <div class="stat-value"><%= number_with_delimiter(@difference_from_last_month) %>円</div>
             </div>
         </div>
     <% end %>
@@ -49,7 +49,7 @@
                     <tr>
                         <td><%= charge.date.strftime('%m/%d') %></td>
                         <td><%= charge.game.name %></td>
-                        <td><%= charge.amount %>円</td>
+                        <td><%= number_with_delimiter(charge.amount) %>円</td>
                         <td><%= link_to '詳細', charge_path(charge), class: 'btn btn-neutral btn-sm' %></td>
                         <td><%= link_to '編集', edit_charge_path(charge), class: 'btn btn-accent btn-sm' %></td>
                         <td><%= link_to '削除',

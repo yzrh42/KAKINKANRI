@@ -23,8 +23,8 @@
               <tr>
                 <td><%= @gacha.date.strftime('%m/%d') %></td>
                 <td><%= @gacha.game.name %></td>
-                <td><%= @gacha.number %>連</td>
-                <td><%= @gacha.amount %>円</td>
+                <td><%= number_with_delimiter(@gacha.number) %>連</td>
+                <td><%= number_with_delimiter(@gacha.amount) %>円</td>
                 <td><%= @gacha.memo %></td>
                 <td><%= image_tag(@gacha.image.url) if @gacha.image.present? %></td>
               </tr>

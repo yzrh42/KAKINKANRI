@@ -91,3 +91,5 @@ gem "chartkick"
 gem 'byebug'
 
 gem 'ransack'
+
+gem 'acts_as_list'
