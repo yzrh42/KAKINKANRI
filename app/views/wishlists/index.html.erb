@@ -3,6 +3,12 @@
         <h1 class="text-2xl font-bold">欲しいもの一覧</h1>
         <%= link_to "NEW", new_wishlist_path, class: "btn btn-neutral btn-sm" %>
     </div>
+    <div class="flex justify-between mb-4">
+        <p>積立額： <%= number_with_delimiter(@available_balance) %>円</p>
+    </div>
+    <div class="flex justify-between mb-4">
+        <p>購入済額： <%= number_with_delimiter(@total_purchased_amount) %>円</p>
+    </div>
     <div class="overflow-x-auto">
         <table class="table">
             <thead>
@@ -23,7 +29,7 @@
                         </td>
                         <td><%= wishlist.name %></td>
                         <td><%= number_with_delimiter(wishlist.price) %>円</td>
-                        <% if available_balance >= wishlist.price %>
+                        <% if @purchaseable_balance >= wishlist.price %>
                             <td><%= link_to '購入', purchase_wishlist_path(wishlist), data: { turbo_method: :put }, class: 'btn btn-primary btn-sm' %></td>
                             <% available_balance -= wishlist.price %>
                         <% else %>
