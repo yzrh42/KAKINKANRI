@@ -19,6 +19,10 @@ Rails.application.routes.draw do
   resources :gachas
   resources :stones
 
+  resources :users do
+    get 'gacha_ban_period/:game_id', to: 'users#gacha_ban_period', as: 'gacha_ban_period'
+  end
+
   resources :wishlists do
     member do
       get :move_higher
