@@ -33,6 +33,13 @@ class User < ApplicationRecord
     self.save!
   end
 
+  def total_purchased_amount(year)
+    start_date = Date.new(year, 1, 1)
+    end_date = start_date.end_of_year
+    
+    wishlists.where(purchased_at: start_date..end_date).sum(:price)
+  end
+
   def monthly_balance(year, include_purchases: true)
     monthly_balances = {}
     (1..12).each do |month|
