@@ -19,7 +19,7 @@
                               class: 'btn btn-secondary btn-sm',
                               data: { turbo_method: :delete} %></td>
                         <td>
-                            <%= link_to 'ガチャ禁期間', user_gacha_ban_period_path(current_user, game_id: gacha.game_id), class: 'btn btn-neutral btn-sm' %>
+                            <%= link_to 'ガチャ禁期間', gacha_ban_period_path(game_id: gacha.game_id), class: 'btn btn-neutral btn-sm' %>
                         </td>
                     </tr>
                 <% end %>

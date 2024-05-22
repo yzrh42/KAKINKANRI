@@ -44,6 +44,17 @@ class GachasController < ApplicationController
         @gacha.destroy!
         redirect_to gachas_path, success: '予算を削除しました'
     end
+
+    def gacha_ban_period
+        game_id = params[:game_id]
+        @game = Game.find(game_id)
+        last_gacha_date = current_user.gachas.where(game_id: game_id).order(date: :desc).limit(1).pluck(:date).first
+        if last_gacha_date.nil?
+          @gacha_ban_days = 0
+        else
+          @gacha_ban_days = (Date.today - last_gacha_date.to_date).to_i
+        end
+    end
     
     private
     
