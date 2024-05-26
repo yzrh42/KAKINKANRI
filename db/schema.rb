@@ -10,7 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_01_134846) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_26_145750) do
+  create_table "bans", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "game_id", null: false
+    t.datetime "start_date"
+    t.integer "ban_days"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["game_id"], name: "index_bans_on_game_id"
+    t.index ["user_id"], name: "index_bans_on_user_id"
+  end
+
   create_table "budgets", force: :cascade do |t|
     t.integer "year", null: false
     t.integer "month", null: false
@@ -95,6 +106,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_01_134846) do
     t.index ["user_id"], name: "index_wishlists_on_user_id"
   end
 
+  add_foreign_key "bans", "games"
+  add_foreign_key "bans", "users"
   add_foreign_key "charges", "users"
   add_foreign_key "gachas", "games"
   add_foreign_key "gachas", "users"

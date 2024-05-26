@@ -3,6 +3,7 @@ class Game < ApplicationRecord
     has_many :gachas
     has_many :charges
     has_many :stones
+    has_many :bans
 
     validates :name, presence: true, uniqueness: true
 

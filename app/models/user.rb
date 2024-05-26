@@ -11,6 +11,7 @@ class User < ApplicationRecord
   has_many :gachas
   has_many :stones
   has_many :wishlists
+  has_many :bans
   
   def social_profile(provider)
     social_profiles.select { |sp| sp.provider == provider.to_s }.first
