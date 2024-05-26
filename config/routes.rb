@@ -18,6 +18,9 @@ Rails.application.routes.draw do
   resources :budgets
   resources :gachas
   resources :stones
+  resources :bans
+
+  get 'gachas/:game_id/gacha_ban_period', to: 'gachas#gacha_ban_period', as: 'gacha_ban_period'
 
   resources :wishlists do
     member do
