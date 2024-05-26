@@ -1,6 +1,10 @@
 class BansController < ApplicationController
+    before_action :gacha_ban_period, only: :index
+
     def index
         @bans = current_user.bans
+        @games = Game.where(user_id: [current_user.id, nil]).order(name: :asc)
+        @ban_days_by_game = calculate_ban_days_by_game
     end
     
     def new
@@ -46,17 +50,51 @@ class BansController < ApplicationController
     end
 
     def gacha_ban_period
-        game_id = params[:game_id]
+      game_id = params[:game_id]
+  
+      if game_id.present?
         @game = Game.find(game_id)
-        last_gacha_date = current_user.gachas.where(game_id: game_id).order(date: :desc).limit(1).pluck(:date).first
+        last_gacha_date = current_user.bans.where(game_id: game_id).order(start_date: :desc).limit(1).pluck(:start_date).first
+  
         if last_gacha_date.nil?
           @gacha_ban_days = 0
         else
           @gacha_ban_days = (Date.today - last_gacha_date.to_date).to_i
         end
+      else
+        @gacha_ban_days = 'N/A'
+        @game = nil
+      end
     end
+  
     
     private
+
+    def calculate_ban_days_by_game
+      result = {}
+  
+      @games.each do |game|
+        ban = current_user.bans.find_by(game_id: game.id)
+        gacha_date = current_user.gachas.where(game_id: game.id).order(date: :desc).limit(1).pluck(:date).first
+  
+        if gacha_date.present? && (ban.nil? || gacha_date > ban.start_date)
+          # ガチャ記録の日付が存在し、かつbanが存在しないか、banのstart_dateより新しい場合
+          start_date = gacha_date
+        elsif ban.present?
+          start_date = ban.start_date
+        else
+          start_date = nil
+        end
+  
+        if start_date
+          result[game.id] = (Date.today - start_date.to_date).to_i
+        else
+          result[game.id] = 'N/A'
+        end
+      end
+  
+      result
+    end
     
     def ban_params
         params.require(:ban).permit(:user_id, :game_id, :start_date)
