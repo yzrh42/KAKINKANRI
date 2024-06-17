@@ -2,7 +2,7 @@ class HomesController < ApplicationController
   def index
     current_year = Time.current.year
     current_month = Time.current.month
-    @budget = Budget.where(year: current_year, month: current_month).first
+    @budget = Budget.where(year: current_year, month: current_month, user_id: current_user.id).first
     @charges_this_month = Charge.where("date >= ? AND date <= ? AND user_id = ?", Time.current.beginning_of_month, Time.current.end_of_month, current_user.id).order(:date)
     @total_spent_this_month = @charges_this_month.sum(:amount)
     @remaining_budget = @budget.amount - @total_spent_this_month if @budget
