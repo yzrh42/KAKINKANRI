@@ -1,20 +1,20 @@
-<div class="mx-auto w-11/12 max-w-2xl text-center my-10">
+<div class="mx-auto w-11/12 max-w-lg text-center my-10">
     <div class="flex justify-between mb-4">
         <h1 class="text-2xl font-bold">欲しいもの一覧</h1>
         <%= link_to "NEW", new_wishlist_path, class: "btn btn-neutral btn-sm" %>
     </div>
-    <div class="stats shadow">
+    <div class="stats shadow mb-4 w-full">
         <div class="stat">
-            <div class="stat-title">積立額</div>
-            <div class="stat-value"><%= number_with_delimiter(@available_balance) %>円</div>
+            <div class="stat-title text-base sm:text-lg md:text-xl">積立額</div>
+            <div class="stat-value text-lg sm:text-xl md:text-2xl"><%= number_with_delimiter(@available_balance) %>円</div>
         </div>
         <div class="stat">
-            <div class="stat-title">購入済合計額</div>
-            <div class="stat-value"><%= number_with_delimiter(@total_purchased_amount) %>円</div>
+            <div class="stat-title text-base sm:text-lg md:text-xl">購入済合計額</div>
+            <div class="stat-value text-lg sm:text-xl md:text-2xl"><%= number_with_delimiter(@total_purchased_amount) %>円</div>
         </div>
         <div class="stat">
-            <div class="stat-title">購入可能額</div>
-            <div class="stat-value"><%= number_with_delimiter(@purchaseable_balance) %>円</div>
+            <div class="stat-title text-base sm:text-lg md:text-xl">購入可能額</div>
+            <div class="stat-value text-lg sm:text-xl md:text-2xl"><%= number_with_delimiter(@purchaseable_balance) %>円</div>
         </div>
     </div>
     <div class="overflow-x-auto">
