@@ -1,5 +1,5 @@
 class StaticPagesController < ApplicationController
-  skip_before_action
+  skip_before_action :authenticate_user!, only: [:top, :contact, :privacy_policy, :terms_of_service]
   def top; end
 
   def contact; end
