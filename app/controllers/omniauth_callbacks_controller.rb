@@ -1,34 +1,26 @@
 class OmniauthCallbacksController < ApplicationController
-    skip_before_action
+  skip_before_action :verify_authenticity_token, only: :line
+  def line
+    # OmniAuthからの認証情報を取得
+    auth = request.env['omniauth.auth']
 
-    def line
-        basic_action
-    end
+    # 取得した認証情報に基づいてユーザーを検索または作成
+    @user = User.from_omniauth(auth)
 
-    def failure
-        # ここに失敗時の処理を記述する
-        redirect_to root_path, alert: "認証に失敗しました。"
-        # 例: ルートパスにリダイレクトする 
+    if @user.persisted?
+      # ユーザーが永続化（保存）されていればログイン成功
+      sign_in_and_redirect @user, event: :authentication # this will throw if @user is not activated
+      set_flash_message(:notice, :success, kind: 'LINE') if is_navigational_format?
+    else
+      # ユーザーの保存に失敗した場合（例: バリデーションエラーなど）
+      # セッションに認証情報を一時的に保存し、新規登録画面などにリダイレクト
+      session['devise.line_data'] = auth.except('extra') # 'extra' は大きい場合があるので除外
+      redirect_to new_user_registration_url, alert: @user.errors.full_messages.join(', ')
     end
+  end
 
-    private
-    def basic_action
-      @omniauth = request.env["omniauth.auth"]
-      if @omniauth.present?
-        @profile = User.find_or_initialize_by(provider: @omniauth["provider"], uid: @omniauth["uid"])
-        if @profile.email.blank?
-          email = @omniauth["info"]["email"] ? @omniauth["info"]["email"] : "#{@omniauth["uid"]}-#{@omniauth["provider"]}@example.com"
-          @profile = current_user || User.create!(provider: @omniauth["provider"], uid: @omniauth["uid"], email: email, name: @omniauth["info"]["name"], password: Devise.friendly_token[0, 20])
-        end
-        @profile.set_values(@omniauth)
-        sign_in(:user, @profile)
-      end
-      flash[:notice] = "ログインしました"
-      redirect_to root_path
-    end
-  
-    def fake_email(uid, provider)
-      "#{auth.uid}-#{auth.provider}@example.com"
-    end
-
+  def failure
+    # 認証失敗時の処理
+    redirect_to root_path, alert: 'LINEログインに失敗しました。'
+  end
 end
