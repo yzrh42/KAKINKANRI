@@ -12,6 +12,23 @@ class User < ApplicationRecord
   has_many :stones
   has_many :wishlists
   has_many :bans
+
+  def self.from_omniauth(auth)
+    # providerとuidでユーザーを検索
+    user = where(provider: auth.provider, uid: auth.uid).first_or_initialize do |u|
+      # ユーザーが存在しない場合は新しく作成
+      u.email = auth.info.email || "#{auth.uid}@example.com" # メールアドレスがない場合の仮のメールアドレス
+      u.password = Devise.friendly_token[0,20] # パスワードはランダムに生成
+      u.name = auth.info.name
+      u.line_profile_image = auth.info.image
+    end
+
+    # ユーザーがDBに存在しない（新規作成）か、情報が更新された場合に保存
+    if user.new_record? || user.changed?
+      user.save
+    end
+    user
+  end
   
   def social_profile(provider)
     social_profiles.select { |sp| sp.provider == provider.to_s }.first
