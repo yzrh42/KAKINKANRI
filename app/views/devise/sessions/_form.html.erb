@@ -1,0 +1,18 @@
+<%= form_with model: resource, url: session_path(resource_name), local: true, data: { turbo: false }, authenticity_token: true do |f| %>
+    <%= render "devise/shared/error_messages", resource: resource %>
+    <label class="form-control w-full max-w-xs">
+      <div class="label">
+        <span class="label-email">メールアドレス ※必須</span>
+      </div>
+      <%= f.text_field :email, class: "input input-bordered w-full max-w-xs" %>
+    </label>
+    <label class="form-control w-full max-w-xs">
+      <div class="label">
+        <span class="label-password">パスワード ※必須</span>
+      </div>
+      <%= f.password_field :password, class: "input input-bordered w-full max-w-xs" %>
+    </label>
+    <div class="mt-10">
+        <%= f.submit "ログイン", class: 'btn btn-primary'  %>
+    </div>
+<% end %>
