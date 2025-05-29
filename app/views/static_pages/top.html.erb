@@ -10,25 +10,9 @@
     <p class="text-left sm:text-center leading-8 w-11/12 mx-auto">
       まずは、今月の予算を登録しましょう。その後、課金を登録することによって、今月の残り予算が表示されるようになります。課金のしすぎにはご注意を！
     </p>
-    <p class="text-left sm:text-center leading-8 w-11/12 mx-auto">
-      公式LINEアカウントで「課金可能額」と送信すると今月の使用可能額が返信されます。ぜひ活用してみてください。
-    </p>
   </div>
   <div class="my-20">
     <% if user_signed_in? %>
-        <h1 class="text-lg font-bold my-4 border-dotted border-b-4 border-green-200">友達登録はこちらから！</h1>
-        <p class="text-left sm:text-center leading-8 w-11/12 mx-auto">
-          アプリのLINEアカウントを友だち追加することで、メッセージを受け取れます。下記のボタンをクリックして是非友だち追加をしてください。
-        </p>
-        <style>
-          .line-it-button {
-          display: inline-block;
-          }
-        </style>
-        <div class="d-flex align-items-center pt-3 justify-content-center">
-          <div class="line-it-button" data-lang="ja" data-type="friend" data-env="REAL"   data-lineId="@<%= ENV["LINE_OFFICIAL_ID"] %>"></div>
-            <script src="https://www.line-website.com/social-plugins/js/thirdparty/loader.min.js" async="async" defer="defer"></script>
-        </div>
         <h1 class="text-lg font-bold my-4 border-dotted border-b-4 border-green-200">予算登録はこちらから！</h1>
         <%= link_to '予算登録', new_budget_path, class: "btn btn-primary shadow-xl mt-10" %>
     <% else %>
