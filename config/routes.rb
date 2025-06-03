@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  get 'tests/layout'
   devise_for :users, controllers: {
     omniauth_callbacks: "omniauth_callbacks"
   }
