@@ -3,6 +3,8 @@ require "active_support/core_ext/integer/time"
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
   config.hosts << "kakin-kanri-56d53abf9406.herokuapp.com"
+  config.hosts << "www.kakin-kanri.com"
+  config.hosts << "kakin-kanri.com"
   # Code is not reloaded between requests.
   config.enable_reloading = false
 
