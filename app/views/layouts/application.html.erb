@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html data-theme="pastel">
+<html data-theme="pastel" class="h-full">
   <head>
     <title>KAKINkanri</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -11,10 +11,12 @@
     <%= javascript_include_tag "//www.google.com/jsapi", "chartkick" %>
   </head>
 
-  <body>
+  <body class="flex flex-col min-h-screen">
     <%= render 'shared/header' %>
     <%= render 'shared/flash_message' %>
-    <%= yield %>
+    <main class="flex-grow min-h-0">
+      <%= yield %>
+    </main>
     <%= render 'shared/footer' %>
   </body>
 </html>
